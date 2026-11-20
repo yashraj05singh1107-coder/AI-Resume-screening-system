@@ -1,0 +1,261 @@
+:root {
+  --navy: #14283f;
+  --blue: #2563eb;
+  --ink: #172b4d;
+  --muted: #64748b;
+  --line: #e2e8f0;
+  --bg: #f5f7fb;
+}
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+}
+.navbar {
+  background: var(--navy);
+  padding: 15px 0;
+}
+.navbar-brand {
+  letter-spacing: -0.5px;
+}
+.navbar-brand span {
+  color: #7dd3fc;
+}
+.hero {
+  background: linear-gradient(120deg, #14283f, #234e70);
+  border-radius: 20px;
+  color: white;
+  overflow: hidden;
+}
+.hero h1 {
+  letter-spacing: -1.5px;
+}
+.hero h1 span {
+  color: #8bd5f5;
+}
+.hero p {
+  max-width: 650px;
+}
+.eyebrow {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #64748b;
+}
+.hero .eyebrow {
+  color: #a9d9ef;
+}
+.metric,
+.criteria-panel,
+.upload-panel,
+.detail-panel,
+.form-shell,
+.table-card {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  padding: 20px;
+}
+.metric-label {
+  font-size: 0.68rem;
+  letter-spacing: 1.1px;
+  font-weight: 800;
+  color: var(--muted);
+}
+.metric-value {
+  font-size: 2rem;
+  font-weight: 750;
+  letter-spacing: -1px;
+  margin-top: 4px;
+}
+.job-card {
+  display: block;
+  height: 100%;
+  padding: 20px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  color: inherit;
+  text-decoration: none;
+  transition: 0.18s;
+}
+.job-card:hover {
+  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 12px 25px #1e3a5f0c;
+}
+.pill {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #1d4ed8;
+  background: #eff6ff;
+  border-radius: 30px;
+  padding: 5px 9px;
+}
+.skill-preview {
+  font-size: 0.76rem;
+  color: #475569;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.btn-primary {
+  background: #2563eb;
+  border-color: #2563eb;
+}
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+.empty-state {
+  text-align: center;
+  background: white;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 55px 20px;
+}
+.empty-state.compact {
+  padding: 35px 20px;
+}
+.empty-icon {
+  font-size: 2rem;
+  color: #2563eb;
+  margin-bottom: 8px;
+}
+.form-shell {
+  max-width: 780px;
+  margin-inline: auto;
+  padding: 28px;
+}
+.form-control {
+  border-color: #dbe3ed;
+  padding: 10px 12px;
+}
+.form-control:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 0 0.2rem #3b82f61c;
+}
+.form-label {
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+.back-link {
+  color: #475569;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.back-link:hover {
+  color: #2563eb;
+}
+.criteria-panel {
+  padding: 18px 20px;
+}
+.criteria-panel strong {
+  font-size: 0.88rem;
+}
+.weights-note {
+  font-size: 0.75rem;
+  color: #64748b;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.upload-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.upload-form {
+  width: min(100%, 430px);
+}
+.table-card {
+  padding: 0;
+  overflow: hidden;
+}
+.table {
+  font-size: 0.84rem;
+}
+.table thead th {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #64748b;
+  background: #f8fafc;
+  padding: 14px;
+}
+.table td {
+  padding: 14px;
+}
+.rank {
+  font-weight: 800;
+  color: #64748b;
+}
+.candidate-link {
+  font-weight: 700;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+.score-wrap {
+  min-width: 80px;
+}
+.progress {
+  height: 5px;
+  background: #eaf0f7;
+}
+.progress-bar {
+  background: #2563eb;
+}
+.overall-card {
+  background: #eaf3ff;
+  border-radius: 15px;
+  padding: 16px 22px;
+  color: #1d4ed8;
+  min-width: 150px;
+}
+.detail-panel h2 {
+  font-weight: 750;
+}
+.data-list {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 11px;
+  margin: 18px 0 0;
+  font-size: 0.87rem;
+}
+.data-list dt {
+  color: #64748b;
+  font-weight: 500;
+}
+.data-list dd {
+  margin: 0;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+footer {
+  border-top: 1px solid var(--line);
+  margin-top: 30px;
+}
+@media (max-width: 650px) {
+  .hero {
+    border-radius: 14px;
+  }
+  .form-shell {
+    padding: 20px;
+  }
+  .upload-form {
+    width: 100%;
+  }
+  .data-list {
+    grid-template-columns: 100px 1fr;
+  }
+  .table {
+    min-width: 760px;
+  }
+}

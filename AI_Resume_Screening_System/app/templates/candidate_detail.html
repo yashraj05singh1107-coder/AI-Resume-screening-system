@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ candidate.name }} · ResumeRank{% endblock %}
+{% block content %}
+<a class="back-link" href="{{ url_for('main.job_detail', job_id=candidate.job_id) }}">← Back to ranking</a>
+<div class="d-flex justify-content-between flex-wrap gap-3 mt-3 mb-4">
+ <div><div class="eyebrow">CANDIDATE PROFILE · JOB #{{ candidate.job_id }}</div><h1 class="h2 mt-2">{{ candidate.name }}</h1><div class="text-secondary">{{ candidate.email or "No email detected" }}{% if candidate.phone %} · {{ candidate.phone }}{% endif %}</div></div>
+ <div class="overall-card"><div class="eyebrow">OVERALL MATCH</div><div class="display-5 fw-bold">{{ "%.1f"|format(candidate.result.total_score) }}<small class="fs-5">%</small></div></div>
+</div>
+<div class="row g-3 mb-4">
+{% for label, value in [("Skills", candidate.result.skill_score), ("Experience", candidate.result.experience_score), ("Education", candidate.result.education_score), ("Certifications", candidate.result.certification_score)] %}
+<div class="col-6 col-lg-3"><div class="metric"><div class="metric-label">{{ label|upper }}</div><div class="metric-value">{{ "%.0f"|format(value) }}<small class="fs-6">%</small></div><div class="progress mt-2"><div class="progress-bar" style="width: {{ value }}%"></div></div></div></div>
+{% endfor %}
+</div>
+<div class="row g-3">
+<div class="col-lg-6"><div class="detail-panel h-100"><h2 class="h6">Extracted information</h2>
+<dl class="data-list"><dt>Education</dt><dd>{{ candidate.education or "Not detected" }}</dd><dt>Experience</dt><dd>{{ '%g'|format(candidate.experience_years) }} years</dd><dt>Skills</dt><dd>{{ candidate.skills or "No listed skills detected" }}</dd><dt>Certifications</dt><dd>{{ candidate.certifications or "None detected" }}</dd><dt>Resume file</dt><dd>{{ candidate.resume_filename }}</dd></dl></div></div>
+<div class="col-lg-6"><div class="detail-panel h-100"><h2 class="h6">Matching explanation</h2><p>{{ candidate.result.explanation }}</p><div class="small fw-semibold text-success mt-3">Matched skills</div><p class="small">{{ candidate.result.matched_skills or "None" }}</p><div class="small fw-semibold text-danger">Missing skills</div><p class="small">{{ candidate.result.missing_skills or "None" }}</p></div></div>
+</div>
+<p class="small text-secondary mt-3">Automated extraction is heuristic. Review the original resume before making recruitment decisions.</p>
+{% endblock %}

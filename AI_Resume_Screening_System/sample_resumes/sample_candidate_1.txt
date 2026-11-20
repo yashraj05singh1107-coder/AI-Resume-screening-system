@@ -1,0 +1,15 @@
+Aarav Sharma
+aarav.sharma@example.com
++91 9876543210
+
+PROFILE
+Python developer with 2 years of experience building web applications and REST APIs.
+
+EDUCATION
+B.Tech Computer Science
+
+SKILLS
+Python, Flask, SQL, Git, HTML, CSS, JavaScript, REST API
+
+CERTIFICATIONS
+NPTEL Python Programming

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · ResumeRank{% endblock %}
+{% block content %}
+<section class="hero p-4 p-md-5 mb-4">
+  <div class="row align-items-center">
+    <div class="col-lg-8">
+      <div class="eyebrow">RECRUITER WORKSPACE</div>
+      <h1 class="display-6 fw-bold mt-2">Find the right fit,<br><span>with transparent scoring.</span></h1>
+      <p class="text-light-emphasis mb-0">Upload resumes, compare them against job criteria, and review a ranked shortlist using explainable rules—not machine learning.</p>
+    </div>
+    <div class="col-lg-4 text-lg-end mt-4 mt-lg-0">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('main.new_job') }}">Create a job <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+<div class="row g-3 mb-4">
+  <div class="col-md-6"><div class="metric"><div class="metric-label">OPEN JOB PROFILES</div><div class="metric-value">{{ jobs|length }}</div></div></div>
+  <div class="col-md-6"><div class="metric"><div class="metric-label">PROCESSED CANDIDATES</div><div class="metric-value">{{ total_candidates }}</div></div></div>
+</div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div><div class="eyebrow">WORKSPACE</div><h2 class="h4 mb-0">Job profiles</h2></div>
+  <span class="text-secondary small">{{ jobs|length }} total</span>
+</div>
+{% if jobs %}
+<div class="row g-3">
+{% for job in jobs %}
+  <div class="col-md-6 col-xl-4"><a class="job-card" href="{{ url_for('main.job_detail', job_id=job.id) }}">
+    <div class="d-flex justify-content-between"><span class="pill">JOB #{{ job.id }}</span><span class="text-secondary">↗</span></div>
+    <h3 class="h5 mt-3">{{ job.title }}</h3>
+    <p class="text-secondary small">{{ job.description[:125] }}{% if job.description|length > 125 %}…{% endif %}</p>
+    <div class="small text-secondary">{{ job.candidates|length }} candidate(s) · {{ '%g'|format(job.min_experience) }}+ years requested</div>
+    <div class="skill-preview mt-3">{{ job.required_skills or "No skills specified" }}</div>
+  </a></div>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty-state"><div class="empty-icon">＋</div><h3 class="h5">No job profiles yet</h3><p class="text-secondary">Create a job profile to define the criteria used to evaluate resumes.</p><a class="btn btn-primary" href="{{ url_for('main.new_job') }}">Create your first job</a></div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Create job · ResumeRank{% endblock %}
+{% block content %}
+<a class="back-link" href="{{ url_for('main.index') }}">← Dashboard</a>
+<div class="form-shell mt-3">
+  <div class="eyebrow">JOB REQUIREMENTS</div><h1 class="h3 mt-2">Create a screening profile</h1>
+  <p class="text-secondary">The criteria below are used by the rule-based scoring engine.</p>
+  <form method="post" class="mt-4">
+    <div class="mb-3"><label class="form-label">Job title *</label><input class="form-control" name="title" required placeholder="e.g. Python Developer"></div>
+    <div class="mb-3"><label class="form-label">Job description</label><textarea class="form-control" name="description" rows="3" placeholder="Briefly describe the role and responsibilities"></textarea></div>
+    <div class="mb-3"><label class="form-label">Required skills</label><textarea class="form-control" name="required_skills" rows="3" placeholder="Python, Flask, SQL, Git (comma-separated)"></textarea><div class="form-text">Use comma-separated keywords. Fuzzy matching allows small spelling variations.</div></div>
+    <div class="row">
+      <div class="col-md-6 mb-3"><label class="form-label">Minimum experience (years)</label><input class="form-control" type="number" min="0" step="0.5" name="min_experience" value="0"></div>
+      <div class="col-md-6 mb-3"><label class="form-label">Education requirement</label><input class="form-control" name="education_requirement" placeholder="e.g. B.Tech"></div>
+    </div>
+    <div class="mb-4"><label class="form-label">Preferred certifications</label><input class="form-control" name="certifications" placeholder="e.g. NPTEL, AWS Certified"></div>
+    <button class="btn btn-primary px-4">Save job profile</button>
+  </form>
+</div>
+{% endblock %}

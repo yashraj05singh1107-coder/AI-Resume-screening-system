@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ job.title }} · ResumeRank{% endblock %}
+{% block content %}
+<a class="back-link" href="{{ url_for('main.index') }}">← Dashboard</a>
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mt-3 mb-4">
+  <div><div class="eyebrow">JOB #{{ job.id }} · SCREENING PROFILE</div><h1 class="h2 mt-2">{{ job.title }}</h1><p class="text-secondary mb-1">{{ job.description or "No job description provided." }}</p></div>
+  <div class="d-flex gap-2 flex-wrap">
+    <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('main.export_csv', job_id=job.id) }}">CSV</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('main.export_xlsx', job_id=job.id) }}">Excel</a>
+    <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('main.export_pdf', job_id=job.id) }}">PDF report</a>
+  </div>
+</div>
+<div class="criteria-panel mb-4">
+  <div class="eyebrow mb-2">EVALUATION CRITERIA</div>
+  <div class="row g-3">
+    <div class="col-md-6"><div class="small text-secondary">Required skills</div><strong>{{ job.required_skills or "Not specified" }}</strong></div>
+    <div class="col-md-2"><div class="small text-secondary">Experience</div><strong>{{ '%g'|format(job.min_experience) }}+ years</strong></div>
+    <div class="col-md-2"><div class="small text-secondary">Education</div><strong>{{ job.education_requirement or "Any" }}</strong></div>
+    <div class="col-md-2"><div class="small text-secondary">Certifications</div><strong>{{ job.certifications or "Any" }}</strong></div>
+  </div>
+  <div class="weights-note mt-3">Score weights: Skills 50% · Experience 25% · Education 15% · Certifications 10%</div>
+</div>
+<div class="upload-panel mb-4">
+  <div><div class="eyebrow">ADD APPLICANTS</div><h2 class="h5 mt-1">Upload resumes</h2><p class="small text-secondary mb-0">Select multiple PDF or TXT files. Maximum request size: 10 MB.</p></div>
+  <form action="{{ url_for('main.upload_resumes', job_id=job.id) }}" method="post" enctype="multipart/form-data" class="upload-form">
+    <input class="form-control" type="file" name="resumes" accept=".pdf,.txt" multiple required>
+    <button class="btn btn-primary mt-2">Upload & screen</button>
+  </form>
+</div>
+<div class="d-flex justify-content-between align-items-center mb-3"><div><div class="eyebrow">SCREENING RESULTS</div><h2 class="h4 mb-0">Candidate ranking</h2></div><span class="text-secondary small">{{ candidates|length }} processed</span></div>
+{% if candidates %}
+<div class="table-responsive table-card"><table class="table align-middle mb-0">
+<thead><tr><th>Rank</th><th>Candidate</th><th>Skills</th><th>Experience</th><th>Education</th><th>Certs.</th><th>Overall</th><th></th></tr></thead>
+<tbody>
+{% for c in candidates %}
+<tr>
+<td><span class="rank">#{{ loop.index }}</span></td>
+<td><a class="candidate-link" href="{{ url_for('main.candidate_detail', candidate_id=c.id) }}">{{ c.name }}</a><div class="small text-secondary">{{ c.email or "Email not detected" }}</div></td>
+<td>{{ "%.0f"|format(c.result.skill_score) }}%</td><td>{{ "%.0f"|format(c.result.experience_score) }}%</td><td>{{ "%.0f"|format(c.result.education_score) }}%</td><td>{{ "%.0f"|format(c.result.certification_score) }}%</td>
+<td><div class="score-wrap"><strong>{{ "%.1f"|format(c.result.total_score) }}%</strong><div class="progress"><div class="progress-bar" style="width: {{ c.result.total_score }}%"></div></div></div></td>
+<td><a class="btn btn-sm btn-light" href="{{ url_for('main.candidate_detail', candidate_id=c.id) }}">View</a></td>
+</tr>
+{% endfor %}
+</tbody></table></div>
+{% else %}
+<div class="empty-state compact"><div class="empty-icon">↥</div><h3 class="h5">No resumes screened yet</h3><p class="text-secondary">Upload candidate resumes above to calculate their match scores.</p></div>
+{% endif %}
+{% endblock %}

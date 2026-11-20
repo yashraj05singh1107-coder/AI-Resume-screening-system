@@ -1,0 +1,15 @@
+Meera Verma
+meera.verma@example.com
++91 9123456780
+
+PROFILE
+Entry-level developer with 1 year of experience and interest in backend development.
+
+EDUCATION
+Bachelor of Technology
+
+SKILLS
+Python, Django, HTML, CSS, Git, MySQL
+
+CERTIFICATIONS
+Coursera
